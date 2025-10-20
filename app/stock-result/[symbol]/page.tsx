@@ -118,11 +118,11 @@ export default function StockResultPage() {
   }, [symbol])
 
   const periods = [
-    { key: "1M", label: "1 Month" },
-    { key: "6M", label: "6 Months" },
+    { key: "1M", label: "1M" },
+    { key: "6M", label: "6M" },
     { key: "YTD", label: "YTD" },
-    { key: "1Y", label: "1 Year" },
-    { key: "5Y", label: "5 Years" },
+    { key: "1Y", label: "1Y" },
+    { key: "5Y", label: "5Y" },
   ]
 
   const analysisButtons = [
@@ -131,12 +131,6 @@ export default function StockResultPage() {
     { key: "financial", label: "Financial Data", icon: DollarSign },
     { key: "returns", label: "Returns Analysis", icon: TrendingUp },
     { key: "news", label: "Latest News", icon: Newspaper },
-    {
-      key: "support",
-      label: "Support Level Analysis",
-      icon: BarChart3,
-      action: () => router.push("/support-level-analysis"),
-    },
   ]
 
   const renderAnalysisContent = () => {
@@ -144,7 +138,7 @@ export default function StockResultPage() {
       case "summary":
         return (
           <div className="space-y-6">
-            <h3 className="text-xl font-bold text-white mb-4">Company Summary</h3>
+            <h3 className="text-sm font-bold text-white mb-4">Company Summary</h3>
             <div className="grid grid-cols-2 gap-4">
               <div className="bg-slate-800 p-4 rounded-lg">
                 <p className="text-slate-400 text-sm">Market Cap</p>
@@ -199,11 +193,10 @@ export default function StockResultPage() {
               {["Total Revenue", "Gross Profit", "Operating Income", "Net Income"].map((metric, index) => (
                 <button
                   key={metric}
-                  className={`px-4 py-2 rounded-lg font-medium transition-all ${
-                    index === 0
-                      ? "bg-slate-700 text-white border border-slate-600"
-                      : "bg-transparent text-slate-400 hover:text-white hover:bg-slate-800"
-                  }`}
+                  className={`px-4 py-2 rounded-lg font-medium transition-all ${index === 0
+                    ? "bg-slate-700 text-white border border-slate-600"
+                    : "bg-transparent text-slate-400 hover:text-white hover:bg-slate-800"
+                    }`}
                 >
                   {metric}
                 </button>
@@ -448,48 +441,44 @@ export default function StockResultPage() {
   return (
     <>
       <Header />
-      <div className="min-h-screen bg-slate-900 p-4">
+      <div className="min-h-screen p-4 mt-16">
         <div className="container mx-auto max-w-7xl">
-          {/* Header */}
           <div className="mb-6">
             <Button
               variant="outline"
-              onClick={() => router.back()}
-              className="mb-4 bg-slate-800 text-white hover:bg-slate-700 border-slate-600 rounded-full px-6"
+              onClick={() => router.push("/stock-analysis")}
+              className="mb-4 text-white border rounded-md px-4"
             >
-              <ArrowLeft className="h-4 w-4 mr-2" />
-              Back to Main
+              <ArrowLeft className="h-4 w-4" />
+              Back
             </Button>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-10 gap-6">
-            {/* Left Panel - 30% width */}
             <div className="lg:col-span-3">
-              <div className="bg-slate-800 rounded-2xl shadow-2xl p-6 border border-slate-600 sticky top-4">
-                {/* Stock Pro Analytics Header */}
+              <div className="rounded-2xl shadow-2xl p-6 border sticky top-4">
                 <div className="text-center mb-6">
                   <div className="flex items-center justify-center gap-3 mb-4">
                     <div className="p-2 bg-gradient-to-r from-amber-500 to-orange-500 rounded-lg">
-                      <TrendingUp className="h-5 w-5 text-black" />
+                      <TrendingUp className="h-4 w-4 text-black" />
                     </div>
-                    <h1 className="text-xl font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
+                    <h1 className="text-lg font-bold bg-gradient-to-r from-amber-400 to-orange-400 bg-clip-text text-transparent">
                       Stock Pro Analytics
                     </h1>
                   </div>
 
-                  <div className="space-y-3">
+                  <div className="flex items-center justify-between">
                     <div className="flex items-center justify-center gap-2">
                       <span className="text-sm text-slate-300">Stock Info:</span>
-                      <span className="text-xl font-bold text-blue-400">{stockData.symbol}</span>
+                      <span className="text-md font-bold text-blue-500">{stockData.symbol}</span>
                     </div>
 
                     <div className="text-sm text-slate-300">
-                      Price: <span className="font-medium text-amber-400">- USD -</span>
+                      Price: <span className="font-medium text-amber-400">$500</span>
                     </div>
                   </div>
                 </div>
 
-                {/* Analysis Buttons */}
                 <div className="space-y-3 mb-6">
                   {analysisButtons.map((button) => {
                     const IconComponent = button.icon
@@ -504,11 +493,10 @@ export default function StockResultPage() {
                             setActiveAnalysis(button.key)
                           }
                         }}
-                        className={`w-full h-12 justify-start ${
-                          activeAnalysis === button.key
-                            ? "bg-amber-500 hover:bg-amber-600 text-black border-amber-500"
-                            : "bg-transparent hover:bg-slate-800/50 border-slate-600 text-slate-200 hover:border-amber-500"
-                        } font-medium rounded-xl transition-all duration-200`}
+                        className={`w-full h-12 justify-start ${activeAnalysis === button.key
+                          ? "bg-amber-500 hover:bg-amber-600 text-black border-amber-500"
+                          : "bg-transparent hover:bg-slate-800/50 border-slate-600 text-slate-200 hover:border-amber-500"
+                          } rounded-xl transition-all duration-200`}
                       >
                         <IconComponent className="h-4 w-4 mr-3" />
                         {button.label}
@@ -517,10 +505,9 @@ export default function StockResultPage() {
                   })}
                 </div>
 
-                {/* Time Period Buttons */}
                 <div className="space-y-2 mb-6">
-                  <h4 className="text-sm font-medium text-slate-300 mb-3">Time Period</h4>
-                  <div className="grid grid-cols-2 gap-2">
+                  <h4 className="text-sm text-slate-300 mb-3">Time Period</h4>
+                  <div className="grid grid-cols-5 gap-2">
                     {periods.map((period) => (
                       <Button
                         key={period.key}
@@ -539,21 +526,20 @@ export default function StockResultPage() {
                   </div>
                 </div>
 
-                {/* Action Buttons */}
-                <div className="space-y-3">
+                <div className="flex items-center justify-between gap-2">
                   <Button
                     variant="outline"
-                    className="w-full h-12 bg-transparent hover:bg-slate-800/50 border-slate-600 text-slate-200 font-medium rounded-xl hover:border-amber-500 transition-all duration-200"
+                    className="w-full bg-transparent hover:bg-slate-800/50 border-slate-600 text-slate-200 font-medium rounded-xl hover:border-amber-500 transition-all duration-200"
                   >
-                    <Plus className="h-4 w-4 mr-2" />
-                    Add to Favorites
+                    <Plus className="h-4 w-4" />
+                    Add to favorites
                   </Button>
                   <Button
-                    className="w-full h-12 bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-xl transition-all duration-200"
+                    className="w-full bg-amber-500 hover:bg-amber-600 text-black font-medium rounded-xl transition-all duration-200"
                     onClick={() => router.push("/favorite-stocks")}
                   >
-                    <Star className="h-4 w-4 mr-2 text-yellow-400" />
-                    My Favorite Stocks
+                    <Star className="h-4 w-4" />
+                    My Favorite
                   </Button>
                 </div>
               </div>
@@ -563,15 +549,15 @@ export default function StockResultPage() {
             <div className="lg:col-span-7">
               <div className="space-y-6">
                 {/* Chart Area */}
-                <div className="bg-slate-800 rounded-2xl p-6 border border-slate-600">
+                <div className="rounded-2xl p-6 border">
                   {/* Price Label */}
                   <div className="flex items-center gap-2 mb-6">
-                    <div className="w-3 h-3 bg-blue-400 rounded-full"></div>
-                    <span className="text-lg font-medium text-white">Closing Price</span>
+                    <div className="w-3 h-3 bg-primary rounded-full"></div>
+                    <span className="text-sm font-medium text-white">Closing Price</span>
                   </div>
 
                   {/* Chart Area */}
-                  <div className="relative h-80 bg-slate-700 rounded-lg border border-slate-600 p-4">
+                  <div className="relative h-80 rounded-lg border border-slate-600 p-4">
                     <div className="absolute inset-4">
                       {/* Chart simulation */}
                       <svg className="w-full h-full" viewBox="0 0 300 200">
@@ -610,33 +596,11 @@ export default function StockResultPage() {
                       <div className="absolute bottom-0 right-0 text-xs text-slate-400">Jan 15</div>
                       <div className="absolute bottom-0 left-1/3 text-xs text-slate-400">Nov 25</div>
                     </div>
-
-                    {/* Chart overlay with muted icon */}
-                    <div className="absolute inset-0 flex items-center justify-center">
-                      <div className="bg-slate-600 rounded-lg p-8 opacity-90 border border-slate-500">
-                        <div className="w-16 h-16 bg-slate-700 rounded flex items-center justify-center">
-                          <div className="text-slate-400">
-                            <svg
-                              width="32"
-                              height="32"
-                              viewBox="0 0 24 24"
-                              fill="none"
-                              stroke="currentColor"
-                              strokeWidth="2"
-                            >
-                              <path d="M11 5L6 9l5 4-5 4 5 4" />
-                              <path d="M13 5l5 4-5 4 5 4-5 4" />
-                              <line x1="1" y1="1" x2="23" y2="23" />
-                            </svg>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
                   </div>
                 </div>
 
                 {/* Analysis Content */}
-                <div className="bg-slate-800 rounded-2xl p-6 border border-slate-600">{renderAnalysisContent()}</div>
+                <div className="rounded-2xl p-6 border border-slate-600">{renderAnalysisContent()}</div>
               </div>
             </div>
           </div>

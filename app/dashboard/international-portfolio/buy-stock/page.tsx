@@ -354,7 +354,7 @@ export default function BuyStockPage() {
                                     onChange={formik.handleChange}
                                  />
                                  {formik.errors.quantity && (
-                                    <label className="text-xs text-red-500">{formik.errors.quantity}11</label>
+                                    <label className="text-xs text-red-500">{formik.errors.quantity}</label>
                                  )}
                                  {formik.errors.buy_price && (
                                     <label className="text-xs text-red-500">{formik.errors.buy_price}</label>
